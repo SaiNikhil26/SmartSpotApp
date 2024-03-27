@@ -13,13 +13,13 @@ def index():
     free_slots = get_free_slots()  # Call function to fetch data
     which_slot = int(get_which_slot())
     if which_slot == 0:
-        display_slot = "Slot-1 and Slot-2 are Free"
+        display_slot = "No Available Slots"
     elif which_slot == 1:
         display_slot = "Slot-1 is Free"
     elif which_slot == 2:
         display_slot = "Slot-2 is Free"
     else:
-        display_slot = "No Slot is Available"
+        display_slot = "Slot-1 and Slot-2 are Available"
     return render_template(
         "index.html", free_slots=free_slots, display_slot=display_slot
     )
