@@ -3,12 +3,108 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Free Parking Slots</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Management System</title>
+    <style>
+        /* Global Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #111;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        nav {
+            background-color: #222;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 20px;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: yellow;
+        }
+
+        /* Dark Theme */
+        .dark-theme {
+            background-color: #111;
+            color: #fff;
+        }
+
+        /* Light Theme */
+        .light-theme {
+            background-color: #f5f5f5;
+            color: #111;
+        }
+
+        /* Glow Effect */
+        .glow {
+            text-shadow: 0 0 10px yellow;
+        }
+
+        /* Content Styling */
+        .content {
+            padding: 20px;
+            border: 2px solid yellow;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .button {
+            background-color: yellow;
+            color: #111;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #ff0;
+        }
+    </style>
 </head>
 
-<body>
-    <h1>Free Parking Slots: {{ free_slots }}</h1>
-    <h1>{{display_slot}}</h1>
+<body class="dark-theme">
+    <nav>
+        <a href="/">Home</a>
+        <a href="{{url_for('parking')}}">Parking Lots</a>
+        <a href="{{url_for('reservations')}}">Reservations</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <div class="container">
+        <h1 class="glow">SmartSpot</h1>
+        <div class="content">
+            <h2>Available Parking Slots: {{free_slots}}</h2>
+            <p>"Park Smarter, Not Harder: SmartSpot, Your Parking Solution!"</p>
+            <button class="button">Reserve Parking</button>
+        </div>
+    </div>
+
+    <script>
+        // Toggle dark and light themes
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle('dark-theme');
+            body.classList.toggle('light-theme');
+        }
+    </script>
 </body>
 
 </html>

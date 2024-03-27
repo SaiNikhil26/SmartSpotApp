@@ -8,21 +8,30 @@ api_key = "QJZ3ELIZ7VFB0NFP"
 app = Flask(__name__)
 
 
+@app.route("/parking")
+def parking():
+    # free_slots = get_free_slots()  # Call function to fetch data
+    which_slot = int(get_which_slot())
+    if which_slot == 0:
+        display_slot = "No"
+    elif which_slot == 1:
+        display_slot = "Slot-2"
+    elif which_slot == 2:
+        display_slot = "Slot-1"
+    elif which_slot == 3:
+        display_slot = "Both"
+    return render_template("parking.html", display_slot=display_slot)
+
+
 @app.route("/")
 def index():
     free_slots = get_free_slots()  # Call function to fetch data
-    which_slot = int(get_which_slot())
-    if which_slot == 0:
-        display_slot = "No Available Slots"
-    elif which_slot == 1:
-        display_slot = "Slot-2 is Free"
-    elif which_slot == 2:
-        display_slot = "Slot-1 is Free"
-    else:
-        display_slot = "Slot-1 and Slot-2 are Available"
-    return render_template(
-        "index.html", free_slots=free_slots, display_slot=display_slot
-    )
+    return render_template("index.html", free_slots=free_slots)
+
+
+@app.route("/reservations")
+def reservations():
+    return render_template("reservation.html")
 
 
 def get_which_slot():

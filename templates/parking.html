@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Global Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #111;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Parking Map Styles */
+        .parking-map {
+            width: 100%;
+            height: 400px;
+            /* Adjust height as needed */
+            background-color: #444;
+            /* Placeholder color for the map */
+            border: 2px solid yellow;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .glow {
+            text-shadow: 0 0 10px yellow;
+        }
+
+        .parking-spot {
+            width: 100px;
+            height: 100px;
+            background-color: transparent;
+            border: 2px solid red;
+            border-radius: 10px;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .car-icon {
+            font-size: 3rem;
+            /* Adjust font size for better car icon visibility */
+        }
+
+        /* Dynamic Slot Highlighting (using JavaScript) */
+        .empty {
+            width: 100px;
+            height: 100px;
+            background-color: transparent;
+            border: 2px solid;
+            border-radius: 10px;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: #fff;
+            text-transform: uppercase;
+            border-color: green !important;
+            /* Green border for empty slots */
+        }
+
+        .occpied {
+            border-color: red !important;
+            width: 100px;
+            height: 100px;
+            background-color: transparent;
+            border: 2px solid;
+            border-radius: 10px;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: #fff;
+            text-transform: uppercase;
+            /* Green border for empty slots */
+        }
+
+        /* Slot Heading Styles */
+        .slot-heading {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="glow">SmartSpot</h1>
+        <div class="content">
+            <h2>Parking Lot</h2>
+            <div class="parking-map">
+                <div class="parking-spot" id="slot-1" style="top: 30%; left: 30%;">
+                    <span class="slot-heading">Slot-1</span>
+                    <i class="fas fa-car car-icon"></i>
+                </div>
+                <div class="parking-spot" id="slot-2" style="top: 60%; left: 50%;">
+                    <span class="slot-heading">Slot-2</span>
+                    <i class="fas fa-car car-icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const slot1Element = document.getElementById('slot-1');
+        const slot2Element = document.getElementById('slot-2');
+
+        // Function to update slot borders based on display_slot value from Flask
+        function updateSlotBorders(displaySlot) {
+            if (displaySlot === "Slot-1") {
+                slot1Element.classList.remove('parking-spot');
+                slot1Element.classList.add('empty');
+                slot2Element.classList.remove('parking-spot');
+                slot2Element.classList.add('occpied')
+            }
+            if (displaySlot === "Slot-2") {
+                slot2Element.classList.remove('parking-spot');
+                slot2Element.classList.add('empty');
+                slot1Element.classList.remove('parking-spot')
+                slot1Element.classList.add('occpied');
+            }
+            if(displaySlot == "Both")
+            {
+                slot1Element.classList.remove('parking-spot');
+                slot2Element.classList.remove('parking-spot');
+                slot1Element.classList.add('empty');
+                slot2Element.classList.add('empty');
+            }
+            if(displaySlot == "No")
+            {
+                slot1Element.classList.add('occupied');
+                slot2Element.classList.add('occupied');
+            }
+        }
+
+        // Call the function initially to set borders based on the first data fetch
+        updateSlotBorders('{{ display_slot }}');
+    </script>
+</body>
+
+</html>
