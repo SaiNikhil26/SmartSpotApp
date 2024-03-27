@@ -13,7 +13,7 @@ def index():
     free_slots = get_free_slots()  # Call function to fetch data
     which_slot = int(get_which_slot())
     if which_slot == 0:
-        display_slot = "Slot-1 and Slot-2 are Free"
+        display_slot = "No Free Slots Available"
     elif which_slot == 1:
         display_slot = "Slot-1 is Free"
     else:
