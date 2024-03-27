@@ -15,9 +15,9 @@ def index():
     if which_slot == 0:
         display_slot = "No Available Slots"
     elif which_slot == 1:
-        display_slot = "Slot-1 is Free"
-    elif which_slot == 2:
         display_slot = "Slot-2 is Free"
+    elif which_slot == 2:
+        display_slot = "Slot-1 is Free"
     else:
         display_slot = "Slot-1 and Slot-2 are Available"
     return render_template(
